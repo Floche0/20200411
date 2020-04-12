@@ -7,9 +7,7 @@ function AjaxRequest(url, pars, success, error, async, type){
 		dataType: type != null ? type : "text",
 		async: (async == null || async == true) ? true : false,
 		error: error!=null?error:function(req, s, e) {
-			alert(req.responseText);
-			//alert(s);
-			//alert(e);
+
 		},
 		success: success,
 		beforeSend:function(){
