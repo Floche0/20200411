@@ -640,7 +640,26 @@
 			}
 		}
 
-
+		function getGBookList(page) {	
+			var params = {};
+			params.page = page == null ? 1 : page;	
+			params.Flag = "GBookList";
+			AjaxRequest("http://mcard.itscard.co.kr/new_m/mcard/guestbook_proc.asp", $.param(params), function(req) {
+				//alert(req);
+				var totalnum = Number(req.substring(0, req.indexOf(",")));
+				var content = req.substring(req.indexOf(",")+1);
+				$("#contentArea").html(content);
+				$("#pageArea").pager({
+					pageSize:5,
+					totalCount:totalnum,
+					pageClick: function(evt) {
+						getGBookList(evt.data.page);
+					},
+					curPage: page
+				});			
+			});
+		}
+		
 		function goGBookSubmit(){
 
 			if ($("#userName").val() == ""){
@@ -755,8 +774,8 @@
 			description: '예식일\n2020년4월11일(토)오전11시',
 			imageUrl: 'Files/c_th_15194720160.jpg&width=600',
 			link: {
-			  mobileWebUrl: 'http://mcard.itscard.co.kr/2020-0411',
-			  webUrl: 'http://mcard.itscard.co.kr/2020-0411'
+			  mobileWebUrl: 'http://20200411.com',
+			  webUrl: 'http://20200411.com'
 			}
 		  }      
 		});
